@@ -45,6 +45,7 @@ describe("catalogue d'outils", () => {
 describe("chaînes d'interface", () => {
   it("donne les deux langues partout", () => {
     const walk = (node: unknown, path: string) => {
+      expect(typeof node, `${path} doit être un couple { en, fr }`).not.toBe("string");
       if (node && typeof node === "object") {
         const o = node as Record<string, unknown>;
         if (typeof o.en === "string" || typeof o.fr === "string") {

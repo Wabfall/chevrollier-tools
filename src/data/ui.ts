@@ -1,4 +1,11 @@
 import type { Bil } from "../lib/lang";
+import type { Source } from "./tools";
+
+const sourceLabels: Record<Source["state"], Bil> = {
+  public: { en: "Source code", fr: "Code source" },
+  private: { en: "source not public yet", fr: "source pas encore ouverte" },
+  planned: { en: "opening planned", fr: "ouverture prévue" },
+};
 
 export const ui = {
   nav: {
@@ -25,11 +32,7 @@ export const ui = {
   live: {
     badge: { en: "live", fr: "en ligne" } as Bil,
   },
-  source: {
-    public: { en: "Source code", fr: "Code source" } as Bil,
-    private: { en: "source not public yet", fr: "source pas encore ouverte" } as Bil,
-    planned: { en: "opening planned", fr: "ouverture prévue" } as Bil,
-  },
+  source: sourceLabels,
   footer: {
     backToCv: { en: "Back to the portfolio", fr: "Retour au portfolio" } as Bil,
   },
