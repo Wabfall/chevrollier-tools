@@ -1,4 +1,4 @@
-import { GitFork, Lock } from "lucide-react";
+import { Code, Lock } from "lucide-react";
 import type { Source } from "../data/tools";
 import { useLang } from "../lib/lang";
 import { ui } from "../data/ui";
@@ -12,7 +12,7 @@ export default function SourceBadge({ source }: { source: Source }) {
         href={source.url}
         className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-600 transition-colors hover:border-indigo-300 hover:text-indigo-600"
       >
-        <GitFork size={13} />
+        <Code size={13} />
         {ui.source.public[lang]}
       </a>
     );
