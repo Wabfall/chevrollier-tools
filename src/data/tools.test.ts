@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { tools } from "./tools";
+import { ui } from "./ui";
 
 describe("catalogue d'outils", () => {
   it("donne les deux langues de chaque résumé", () => {
@@ -38,5 +39,22 @@ describe("catalogue d'outils", () => {
   it("n'a pas d'identifiant en double", () => {
     const ids = tools.map((t) => t.id);
     expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+describe("chaînes d'interface", () => {
+  it("donne les deux langues partout", () => {
+    const walk = (node: unknown, path: string) => {
+      if (node && typeof node === "object") {
+        const o = node as Record<string, unknown>;
+        if (typeof o.en === "string" || typeof o.fr === "string") {
+          expect(typeof o.en === "string" && o.en.trim(), path).toBeTruthy();
+          expect(typeof o.fr === "string" && o.fr.trim(), path).toBeTruthy();
+          return;
+        }
+        for (const [k, v] of Object.entries(o)) walk(v, `${path}.${k}`);
+      }
+    };
+    walk(ui, "ui");
   });
 });
