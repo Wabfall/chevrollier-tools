@@ -21,7 +21,7 @@ export default function SourceBadge({ source }: { source: Source }) {
   const label = source.state === "private" ? ui.source.private[lang] : ui.source.planned[lang];
 
   return (
-    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-400">
+    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-500">
       <Lock size={11} />
       {label}
     </span>

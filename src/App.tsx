@@ -21,7 +21,7 @@ function Page() {
 
         {rest.length > 0 && (
           <>
-            <h2 className="mt-12 mb-3 font-mono text-[11px] uppercase tracking-[0.13em] font-medium text-slate-400">
+            <h2 className="mt-12 mb-3 font-mono text-[11px] uppercase tracking-[0.13em] font-medium text-slate-500">
               {ui.coming.heading[lang]}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">

@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-16 border-t border-slate-200 py-8">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
         <a href="https://chevrollier.dev" className="font-medium hover:text-slate-700">
           {ui.footer.backToCv[lang]}
         </a>

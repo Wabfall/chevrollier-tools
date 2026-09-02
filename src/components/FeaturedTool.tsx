@@ -42,7 +42,12 @@ export default function FeaturedTool({ tool }: { tool: Tool }) {
         </div>
       </div>
 
-      <a href={tool.href} className="block overflow-hidden rounded-lg border border-slate-200">
+      <a
+        href={tool.href}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="block overflow-hidden rounded-lg border border-slate-200"
+      >
         <img
           src={tool.screenshot}
           alt={tool.name}

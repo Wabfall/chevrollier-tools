@@ -26,9 +26,12 @@ describe("catalogue d'outils", () => {
     }
   });
 
-  it("donne une capture à la vedette", () => {
+  it("donne une capture et un lien à la vedette", () => {
     for (const t of tools) {
-      if (t.featured) expect(t.screenshot, `${t.id}`).toBeTruthy();
+      if (t.featured) {
+        expect(t.screenshot, `${t.id} screenshot`).toBeTruthy();
+        expect(t.href, `${t.id} href`).toMatch(/^https:\/\//);
+      }
     }
   });
 
