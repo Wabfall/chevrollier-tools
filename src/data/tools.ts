@@ -36,7 +36,7 @@ export const tools: Tool[] = [
       state: "public",
       url: "https://github.com/Wabfall/linkedin-post-generator",
     },
-    screenshot: "/linkedin-post-generator.png",
+    screenshot: "/screenshots/linkedin-post-generator.png",
   },
   {
     id: "flat-hunter",
