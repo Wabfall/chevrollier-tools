@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GameUnite – All your games. One couch.</title>
+<meta name="description" content="Free couch launcher for PC games and emulators, built for a controller. Steam, Epic, GOG and your retro collection in one place. Windows, macOS, Linux, Android.">
+<link rel="canonical" href="https://tools.chevrollier.dev/gameunite/">
+<link rel="alternate" hreflang="en" href="https://tools.chevrollier.dev/gameunite/">
+<link rel="alternate" hreflang="fr" href="https://tools.chevrollier.dev/gameunite/fr/">
+<link rel="alternate" hreflang="x-default" href="https://tools.chevrollier.dev/gameunite/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GameUnite">
+<meta property="og:title" content="GameUnite – All your games. One couch.">
+<meta property="og:description" content="Free couch launcher for PC games and emulators, built for a controller. Steam, Epic, GOG and your retro collection in one place. Windows, macOS, Linux, Android.">
+<meta property="og:url" content="https://tools.chevrollier.dev/gameunite/">
+<meta property="og:image" content="https://tools.chevrollier.dev/gameunite/og-en.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0c10">
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/logo/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/logo/icon-180.png">
+<link rel="preload" href="assets/fonts/inter-tight-latin-900-italic.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GameUnite","applicationCategory":"GameApplication","operatingSystem":"Windows, macOS, Linux & Steam Deck, Android","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"license":"https://www.gnu.org/licenses/gpl-3.0.html","softwareVersion":"0.5.0-rc.1","description":"Free couch launcher for PC games and emulators, built for a controller. Steam, Epic, GOG and your retro collection in one place. Windows, macOS, Linux, Android.","url":"https://tools.chevrollier.dev/gameunite/"}</script>
+<script>
+  // A French reader who never chose English lands on the French page. The choice is shared with the hub (key "lang").
+  try { var l = localStorage.getItem("lang"); if (l === "fr" || (!l && /^fr\b/i.test(navigator.language || ""))) location.replace("fr/" + location.hash); } catch (e) {}
+</script>
+<style>
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("assets/fonts/inter-tight-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("assets/fonts/inter-tight-latin-900-italic.woff2") format("woff2"); font-weight: 900; font-style: italic; font-display: swap; }
+/* A dark living room lit by a TV: the app's own "Salon" palette, the logo's four buttons as accents. */
+:root {
+  --ink: #0b0c10; --surface: #15171d; --glass: #2a2c36; --text: #f4f5f7; --muted: #a3a7b3;
+  --violet: #57289a; --violet-deep: #1c1730; --accent: #8b5cf6;
+  --teal: #4fc3c9; --magenta: #c04fbf; --green: #45b26b; --amber: #d9b23a;
+  --line: rgb(244 245 247 / .09);
+  --display: "Inter Tight", Inter, system-ui, sans-serif; --body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gutter: max(20px, env(safe-area-inset-left, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--ink); color: var(--text); font: 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: var(--gutter); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--text); color: var(--ink); padding: 8px 14px; border-radius: 8px; z-index: 10; }
+.skip:focus { left: 8px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.035em; line-height: 1; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(32px, 5vw, 56px); }
+h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+code { font: 14px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--glass); padding: 1px 6px; border-radius: 6px; }
+
+/* Header */
+header.top { position: sticky; top: 0; z-index: 5; backdrop-filter: blur(14px); background: rgb(11 12 16 / .72); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+.brand img { height: 30px; width: auto; }
+nav.links { display: flex; gap: 22px; align-items: center; font-size: 15px; }
+nav.links a { text-decoration: none; color: var(--muted); }
+nav.links a:hover { color: var(--text); }
+.lang { border: 1px solid var(--line); padding: 5px 11px; border-radius: 999px; color: var(--text) !important; }
+@media (max-width: 720px) { nav.links a:not(.lang) { display: none; } }
+
+/* Hero */
+.hero { position: relative; padding-block: clamp(48px, 9vw, 110px) 40px; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: -20% -10% auto 30%; height: 120%; pointer-events: none; z-index: -1;
+  background: radial-gradient(45% 50% at 65% 40%, rgb(79 195 201 / .32), transparent 70%), radial-gradient(40% 45% at 35% 75%, rgb(87 40 154 / .7), transparent 72%); filter: blur(10px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+@media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } }
+.pill { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: rgb(42 44 54 / .6); border: 1px solid var(--line); }
+.pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+.hero h1 { font-size: clamp(46px, 6.4vw, 88px); font-weight: 900; font-style: italic; letter-spacing: -0.045em; margin-top: 22px; }
+.hero h1 span { display: block; color: var(--accent); }
+.hero .sub { font-size: clamp(18px, 2vw, 21px); color: var(--muted); margin-top: 22px; max-width: 34ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; padding: 14px 22px; border-radius: 999px; font-size: 16px; }
+.btn.primary { background: var(--text); color: var(--ink); }
+.btn.ghost { border: 1px solid rgb(244 245 247 / .22); }
+.btn:hover { transform: translateY(-1px); }
+.foot { font-size: 14px; color: var(--muted); margin-top: 22px; }
+.tv { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 40px 120px rgb(0 0 0 / .65), 0 0 0 1px rgb(255 255 255 / .08), 0 0 120px rgb(79 195 201 / .18); aspect-ratio: 16 / 9; background: var(--surface); }
+.tv video, .tv img { width: 100%; height: 100%; object-fit: cover; }
+.tv-stand { width: 34%; height: 10px; margin: 0 auto; background: linear-gradient(var(--glass), transparent); border-radius: 0 0 12px 12px; }
+
+/* Sections */
+section { padding-block: clamp(72px, 10vw, 128px) 0; }
+.kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+.kicker i { width: 12px; height: 12px; border-radius: 50%; background: var(--c, var(--accent)); box-shadow: 0 0 14px var(--c, var(--accent)); }
+.lead { font-size: 19px; color: var(--muted); max-width: 60ch; margin-top: 18px; }
+
+/* Problem: four tools crossed out, merging into one */
+.merge { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 24px; align-items: center; margin-top: 40px; }
+@media (max-width: 760px) { .merge { grid-template-columns: 1fr; } .merge .arrow { transform: rotate(90deg); justify-self: center; } }
+.before { display: grid; gap: 10px; }
+.before li { list-style: none; padding: 14px 18px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); text-decoration: line-through; text-decoration-color: rgb(255 90 110 / .7); text-decoration-thickness: 2px; }
+.before ul { margin: 0; padding: 0; display: grid; gap: 10px; }
+.label { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.arrow { font: 900 italic 42px var(--display); color: var(--accent); }
+.after { padding: 34px; border-radius: 18px; background: linear-gradient(135deg, var(--violet-deep), var(--violet)); display: grid; gap: 14px; align-content: center; min-height: 100%; box-shadow: 0 30px 80px rgb(87 40 154 / .35); }
+.after img { height: 48px; width: auto; }
+
+/* Pillars */
+.pillar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.pillar + .pillar { margin-top: clamp(64px, 9vw, 112px); }
+.pillar:nth-child(even) .visual { order: -1; }
+@media (max-width: 900px) { .pillar { grid-template-columns: 1fr; } .pillar:nth-child(even) .visual { order: 0; } }
+.pillar h3 { font-size: clamp(28px, 3.6vw, 42px); letter-spacing: -0.035em; }
+.pillar p { color: var(--muted); margin-top: 16px; font-size: 18px; max-width: 46ch; }
+.shot { border-radius: 14px; overflow: hidden; box-shadow: 0 30px 80px rgb(0 0 0 / .55), 0 0 0 1px var(--line); }
+.devices { display: grid; grid-template-columns: 3fr 2fr; gap: 16px; align-items: end; }
+.device { border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 24px 60px rgb(0 0 0 / .5); position: relative; }
+.device.handheld { border-radius: 40px; padding: 14px 52px; background: #17181e; }
+.device.handheld img { border-radius: 8px; }
+.device.handheld::before, .device.handheld::after { content: ""; position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; transform: translateY(-50%); }
+.device.handheld::before { left: 20px; background: var(--glass); box-shadow: 0 -22px 0 var(--glass), 0 22px 0 var(--glass); }
+.device.handheld::after { right: 20px; background: var(--teal); box-shadow: -14px 14px 0 var(--amber), 14px 14px 0 var(--magenta), 0 28px 0 var(--green); top: 36%; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.chip { font-size: 14px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+.badge { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); border: 1px solid rgb(79 195 201 / .4); border-radius: 999px; padding: 2px 7px; vertical-align: 3px; margin-left: 6px; }
+
+/* Features grid */
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); margin-top: 40px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 18px; letter-spacing: -0.01em; }
+.card p { color: var(--muted); font-size: 15px; }
+
+/* Platforms */
+.plats { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); margin-top: 40px; }
+.plat { border-radius: 16px; padding: 24px; background: var(--surface); border: 1px solid var(--line); display: grid; gap: 10px; align-content: start; }
+.plat h3 { font-size: 24px; }
+.plat .file { font: 13px ui-monospace, Menlo, monospace; color: var(--muted); word-break: break-all; }
+.plat .note { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.plat .btn { justify-self: start; padding: 10px 16px; font-size: 15px; margin-top: 4px; }
+.plat .soon { font-size: 14px; font-weight: 600; color: var(--amber); }
+
+/* Trust */
+.trust { padding: 0; display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); margin-top: 40px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.trust li { list-style: none; padding: 26px; font: 800 20px/1.25 var(--display); letter-spacing: -0.02em; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.trust ul { display: contents; }
+
+/* Video */
+.player { margin-top: 36px; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 90px rgb(0 0 0 / .6), 0 0 0 1px var(--line); aspect-ratio: 16 / 9; background: #000; }
+.player video { width: 100%; height: 100%; }
+.caption { font-size: 14px; color: var(--muted); margin-top: 12px; }
+
+/* FAQ */
+details { border-bottom: 1px solid var(--line); padding-block: 20px; }
+details:first-of-type { border-top: 1px solid var(--line); margin-top: 32px; }
+summary { cursor: pointer; font: 800 21px/1.3 var(--display); letter-spacing: -0.02em; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::after { content: "+"; color: var(--accent); font-size: 26px; line-height: 1; transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+summary::-webkit-details-marker { display: none; }
+details p { color: var(--muted); margin-top: 12px; max-width: 70ch; }
+
+/* Notify + footer */
+.notify { text-align: center; padding: clamp(40px, 7vw, 80px) 24px; border-radius: 24px; background: radial-gradient(60% 90% at 50% 0%, rgb(87 40 154 / .55), transparent 70%), var(--surface); border: 1px solid var(--line); }
+.notify p { color: var(--muted); max-width: 52ch; margin: 16px auto 0; font-size: 18px; }
+.notify .ctas { justify-content: center; }
+footer { padding-block: 72px calc(48px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 14px; }
+footer .wrap { display: grid; gap: 14px; }
+footer img { height: 26px; width: auto; }
+footer .row { display: flex; flex-wrap: wrap; gap: 18px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./" aria-label="GameUnite"><img src="assets/logo/wordmark.png" alt="GameUnite" width="119" height="30"></a>
+  <nav class="links" aria-label="GameUnite">
+    <a href="#features">Features</a><a href="#platforms">Platforms</a><a href="#faq">FAQ</a>
+    
+    <a class="lang" href="fr/" hreflang="fr" lang="fr" data-lang="fr">Français</a>
+  </nav>
+</div></header>
+
+<main id="main">
+<section class="hero" aria-labelledby="h1"><div class="wrap">
+  <div>
+    <span class="pill"><i></i>Public beta · 0.5.0-rc.1</span>
+    <h1 id="h1">All your games.<span>One couch.</span></h1>
+    <p class="sub">GameUnite brings your Steam, Epic and GOG games and your retro collection together in one controller-first launcher, and sets up the emulators for you.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#notify">Coming soon</a>
+      <a class="btn ghost" href="#video">▶ Watch the 60-second tour</a>
+    </div>
+    <p class="foot">Windows · macOS · Linux &amp; Steam Deck · Android · Free and open source · No account</p>
+  </div>
+  <div>
+    <div class="tv"><video autoplay muted loop playsinline preload="metadata" poster="assets/clips/home-browse-en.jpg" aria-label="Made for the TV"><source src="assets/clips/home-browse-en.webm" type="video/webm"><source src="assets/clips/home-browse-en.mp4" type="video/mp4"></video></div>
+    <div class="tv-stand" aria-hidden="true"></div>
+  </div>
+</div></section>
+
+<section aria-labelledby="problem"><div class="wrap">
+  <h2 id="problem">Three apps to set up before you can play.</h2>
+  <p class="lead">A nice frontend here, an emulator installer there, another launcher for your PC games, and an evening of config files in between. GameUnite does all three, so the evening goes to the games.</p>
+  <div class="merge">
+    <div class="before"><span class="label">Before</span><ul><li>A frontend</li><li>An emulator installer</li><li>A PC games launcher</li><li>Config files</li></ul></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="after"><span class="label" style="color:rgb(244 245 247 / .75)">With GameUnite</span><img src="assets/logo/wordmark.png" alt="GameUnite"></div>
+  </div>
+</div></section>
+
+<section aria-label="Features"><div class="wrap">
+<article class="pillar" style="--c:#4fc3c9">
+    <div><span class="kicker"><i></i>One library</span><h3>Every game you own, together</h3><p>Steam, Epic Games, GOG, Ubisoft Connect, EA app, Battle.net and Xbox app games sit in the same rows as your retro collection: 190+ systems recognised from your own files. Already using ES-DE, RetroBat, LaunchBox, Pegasus or Playnite? Bring your library along.</p></div>
+    <div class="visual"><div class="shot"><img class="" src="assets/img/consoles-en-1600.jpg" srcset="assets/img/consoles-en-960.jpg 960w, assets/img/consoles-en-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 900px" alt="Every game you own, together" loading="lazy" decoding="async" width="1600" height="900"></div></div>
+  </article>
+<article class="pillar" style="--c:#c04fbf">
+    <div><span class="kicker"><i></i>Emulators</span><h3>Grab the controller. That's it.</h3><p>GameUnite installs open-source emulators with verified downloads, and before every game it sets up the controllers for players 1 to 4, the graphics for your screen and RetroAchievements. Every setting it writes is tracked, and one command puts your original files back.</p></div>
+    <div class="visual"><div class="shot"><img class="" src="assets/img/game-page-still-en-1600.jpg" srcset="assets/img/game-page-still-en-960.jpg 960w, assets/img/game-page-still-en-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 900px" alt="Grab the controller. That's it." loading="lazy" decoding="async" width="1600" height="900"></div></div>
+  </article>
+<article class="pillar" style="--c:#45b26b">
+    <div><span class="kicker"><i></i>Interface</span><h3>Made for the TV</h3><p>Full-screen backdrops, video previews, rows of covers and rich game pages, all driven by an Xbox, PlayStation or Switch Pro controller with the right button glyphs. 3,000 games scroll at 60 fps.</p></div>
+    <div class="visual"><div class="shot"><img class="" src="assets/img/home-browse-en-1600.jpg" srcset="assets/img/home-browse-en-960.jpg 960w, assets/img/home-browse-en-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 900px" alt="Made for the TV" loading="lazy" decoding="async" width="1600" height="900"></div></div>
+  </article>
+<article class="pillar" style="--c:#d9b23a">
+    <div><span class="kicker"><i></i>Platforms</span><h3>The same launcher everywhere you play</h3><p>Windows, macOS, Linux and Steam Deck, Android handhelds, phones and TV boxes (beta). Stream from your gaming PC to another room with Moonlight (beta).</p><div class="chips"><span class="chip">Windows</span><span class="chip">macOS</span><span class="chip">Linux &amp; Steam Deck</span><span class="chip">Android</span></div></div>
+    <div class="visual"><div class=""><div class="devices"><div class="device"><img class="" src="assets/img/home-hero-en-1600.jpg" srcset="assets/img/home-hero-en-960.jpg 960w, assets/img/home-hero-en-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 900px" alt="TV" loading="lazy" decoding="async" width="1600" height="900"></div><div class="device handheld"><img class="" src="assets/img/home-hero-en-1600.jpg" srcset="assets/img/home-hero-en-960.jpg 960w, assets/img/home-hero-en-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 900px" alt="Handheld" loading="lazy" decoding="async" width="1600" height="900"></div></div></div></div>
+  </article>
+</div></section>
+
+<section id="video" aria-labelledby="video-t"><div class="wrap">
+  <h2 id="video-t">60 seconds on the couch</h2>
+  <div class="player"><video controls preload="none" playsinline poster="assets/clips/trailer-en.jpg"><source src="assets/clips/trailer-en.mp4" type="video/mp4"></video></div>
+  <p class="caption">Every game shown is made up, with art drawn for this video.</p>
+</div></section>
+
+<section id="features" aria-labelledby="features-t"><div class="wrap">
+  <h2 id="features-t">And everything you'd expect from a good launcher</h2>
+  <div class="grid"><div class="card"><h3>Controller first</h3><p>Xbox, PlayStation and Switch Pro pads with the right button glyphs. Keyboard and mouse work too.</p></div><div class="card"><h3>Fast on big libraries</h3><p>3,000 games at 60 fps, start-up under 2 seconds.</p></div><div class="card"><h3>Every PC store, one library</h3><p>Steam, Epic, GOG, Ubisoft Connect, EA app, Battle.net and Xbox app games, installed or owned.</p></div><div class="card"><h3>Your retro collection, next to your PC games</h3><p>190+ systems recognised from your own files, per-system and per-game emulator choice.</p></div><div class="card"><h3>It sets up the emulators for you</h3><p>Installs 19 open-source emulators with verified downloads, sets up pads for players 1 to 4, graphics and RetroAchievements before each launch.</p></div><div class="card"><h3>Nothing it can't undo</h3><p>Every setting it writes is tracked; one command puts the original files back.</p></div><div class="card"><h3>A setup that asks how you play</h3><p>The first run asks how you play and sets up only that.</p></div><div class="card"><h3>Bring your existing library</h3><p>Optional import from ES-DE, RetroBat, LaunchBox, Pegasus and Playnite, and two-way sync with ES-DE.</p></div><div class="card"><h3>Covers, videos and manuals</h3><p>Built-in scraper (ScreenScraper, LaunchBox, libretro), PDF manuals readable with the pad.</p></div><div class="card"><h3>Same launcher on Android<span class="badge">beta</span></h3><p>Handhelds, phones and TV boxes, with touch support and native Android games.</p></div><div class="card"><h3>Steam Deck Gaming Mode<span class="badge">beta</span></h3><p>AppImage that runs in Gaming Mode.</p></div><div class="card"><h3>Play from another room<span class="badge">beta</span></h3><p>GameUnite as a streaming host, with Moonlight clients on desktop and Android.</p></div><div class="card"><h3>Make it yours</h3><p>Themes you can duplicate and edit, a composable home screen, kid and kiosk modes.</p></div><div class="card"><h3>Sign in from your phone</h3><p>Steam and RetroAchievements sign-in with a QR code: no typing with a pad.</p></div><div class="card"><h3>14 languages</h3><p>English and French reviewed; 12 more in beta until a native speaker reads them.</p></div><div class="card"><h3>No account. No tracking.</h3><p>No telemetry, no analytics, passwords in your system's keychain.</p></div><div class="card"><h3>Free and open source</h3><p>GPL-3.0. No paid tier, no ads, ever.</p></div><div class="card"><h3>Hackable</h3><p>Event scripts and a command line for your own tools.</p></div></div>
+</div></section>
+
+<section id="platforms" aria-labelledby="platforms-t"><div class="wrap">
+  <h2 id="platforms-t">Pick your screen</h2>
+  <div class="plats"><div class="plat"><h3>Windows</h3><p class="muted">Windows 10/11 (x64), per-user installer</p><span class="file">GameUnite_0.5.0-rc.1_x64-setup.exe</span><span class="soon">Available at launch</span><p class="note">Not code-signed yet: SmartScreen asks once</p></div><div class="plat"><h3>macOS</h3><p class="muted">macOS 13+, one universal app (Apple Silicon and Intel)</p><span class="file">GameUnite_0.5.0-rc.1_universal.dmg</span><span class="soon">Available at launch</span><p class="note">Not notarized: “Open Anyway” once in Privacy &amp; Security</p></div><div class="plat"><h3>Linux &amp; Steam Deck</h3><p class="muted">AppImage, Steam Deck Gaming Mode</p><span class="file">GameUnite_0.5.0-rc.1_amd64.AppImage</span><span class="soon">Available at launch</span><p class="note">Not tested on a real Steam Deck yet</p></div><div class="plat"><h3>Android</h3><p class="muted">Handhelds, phones, foldables, tablets and TV boxes (arm64)</p><span class="file">GameUnite-0.5.0-rc.1-arm64.apk</span><span class="soon">Available at launch</span><p class="note">Install from GitHub or Obtainium (not on the Play Store)</p></div></div>
+</div></section>
+
+<section aria-labelledby="trust-t"><div class="wrap">
+  <h2 id="trust-t">Free. Open source. Yours.</h2>
+  <ul class="trust"><li>No account, no telemetry, no analytics.</li><li>Passwords stay in your system's keychain.</li><li>GPL-3.0: no paid tier, no ads, ever.</li><li>Translated into 14 languages, by a community you can join.</li></ul>
+</div></section>
+
+<section id="faq" aria-labelledby="faq-t"><div class="wrap">
+  <h2 id="faq-t">Questions</h2>
+  <details><summary>Is it really free?</summary><p>Yes. GameUnite is free software under the GPL-3.0. There is no paid tier, no ads and no tracking, and there never will be.</p></details>
+  <details><summary>Does it come with games?</summary><p>GameUnite does not download, provide or manage games, ROMs or BIOS files. It only launches what you already own.</p></details>
+  <details><summary>Which emulators does it install?</summary><p>19 open-source emulators and the RetroArch cores, downloaded from their official releases and checked against pinned SHA-256 hashes. When an emulator's license forbids redistribution, GameUnite guides you to its official download instead.</p></details>
+  <details><summary>Do I need ES-DE, EmuDeck or anything else first?</summary><p>No. GameUnite recognises your games on its own. If you already use ES-DE, RetroBat, LaunchBox, Pegasus or Playnite, you can import your library, and keep it in sync with ES-DE if you like.</p></details>
+  <details><summary>Will it mess up my emulator settings?</summary><p>Every key it writes is tracked, a value you changed by hand is left alone, and <code>gameunite --release</code> puts the original files back.</p></details>
+  <details><summary>Why does Windows or macOS warn me when I install it?</summary><p>The installers are not code-signed yet (certificates cost money and GameUnite is free). On Windows choose “More info” then “Run anyway”; on macOS, “Open Anyway” in Privacy &amp; Security, once.</p></details>
+  <details><summary>Is it finished?</summary><p>It is a public beta (0.5.0-rc.1). Windows, macOS and Android are tested on real hardware; Linux is tested in a container and the Steam Deck not yet. Found a bug? Open an issue on GitHub.</p></details>
+  <details><summary>Does it collect data?</summary><p>No. It only connects to the network for what you use: update checks, the scraper, your store accounts and emulator downloads.</p></details>
+  <details><summary>Can I help?</summary><p>Yes! Twelve of the fourteen languages were translated without a native speaker: reading one is the most useful thing you can do. Code, themes and bug reports are welcome too.</p></details>
+</div></section>
+
+<section id="notify"><div class="wrap"><div class="notify">
+  <h2>Be there for launch day</h2>
+  <p>GameUnite goes public soon. Follow Wabfall on GitHub to get the first release.</p>
+  <div class="ctas"><a class="btn primary" href="https://github.com/Wabfall">Follow on GitHub</a></div>
+</div></div></section>
+</main>
+
+<footer><div class="wrap">
+  <img src="assets/logo/wordmark.png" alt="GameUnite">
+  <p>Made by Wabfall and the GameUnite contributors · GPL-3.0-or-later</p>
+  <p>GameUnite does not download, provide or manage games, ROMs or BIOS files. It only launches what you already own. GameUnite is not affiliated with ES-DE, Valve, Epic Games, Ubisoft, ScreenScraper, LaunchBox or libretro. All trademarks belong to their respective owners.</p>
+  <div class="row">
+    <a href="https://tools.chevrollier.dev/">More tools by the same maker</a>
+    
+    <a href="fr/" hreflang="fr" data-lang="fr">Français</a>
+  </div>
+</div></footer>
+<script>
+  // Remember an explicit language choice (shared with the hub), so the English page stops redirecting.
+  document.querySelectorAll("[data-lang]").forEach(function (el) {
+    el.addEventListener("click", function () { try { localStorage.setItem("lang", el.dataset.lang); } catch (e) {} });
+  });
+  // No looping video for people who asked for less motion.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.querySelectorAll("video[autoplay]").forEach(function (v) { v.pause(); v.removeAttribute("autoplay"); });
+</script>
+</body>
+</html>

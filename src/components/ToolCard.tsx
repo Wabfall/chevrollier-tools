@@ -46,6 +46,15 @@ export default function ToolCard({ tool }: { tool: Tool }) {
             <ArrowUpRight size={13} />
           </a>
         )}
+        {!isLive && tool.href && (
+          <a
+            href={tool.href}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
+          >
+            {ui.coming.page[lang]}
+            <ArrowUpRight size={13} />
+          </a>
+        )}
         <SourceBadge source={tool.source} />
       </div>
     </article>
