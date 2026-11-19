@@ -28,6 +28,7 @@ export const ui = {
   coming: {
     heading: { en: "Coming here soon", fr: "Bientôt accessibles ici" } as Bil,
     badge: { en: "coming soon", fr: "à venir" } as Bil,
+    page: { en: "See the page", fr: "Voir la page" } as Bil,
   },
   live: {
     badge: { en: "live", fr: "en ligne" } as Bil,
